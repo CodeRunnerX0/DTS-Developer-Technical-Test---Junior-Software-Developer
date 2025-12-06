@@ -55,7 +55,7 @@ This solution was designed with clean separation and attention to data integrity
 
 * Styling: A clean CSS design was used to prioritize readability and accessibility.
 
-## 3. Troubleshooting & Environment Notes 🚨
+## 3. Troubleshooting & Environment Notes 
 
 The primary setup challenge has been resolved.
 
