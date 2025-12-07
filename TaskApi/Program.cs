@@ -5,27 +5,30 @@ using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Add services to the container
 
+// Registers controllers for API end points
 builder.Services.AddControllers();
+
 builder.Services.AddEndpointsApiExplorer();
 
-//Swagger configuration 
+// Configure Swagger for API documentation 
 builder.Services.AddSwaggerGen(options =>
 {
-
-//Include XML Documentation
+    // Include XML comments generated from code comments
 
     var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
     options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
 });
 
-// Configure DbContext with SQLite
+// Registers db context to use SQL Lite for EF to be able to interact with the database
+// Uses the connection string to connect to sqlite database
 builder.Services.AddDbContext<TaskContext>(options =>
-    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"))); 
+    
 
 
-//Add CORS to allow React to access API 
+//Add CORS to allow React to communicate to the API 
 builder.Services.AddCors(options => {
     options.AddPolicy("AllowReactApp", policy => 
         policy.WithOrigins("http://localhost:3000") // React’s URL
@@ -33,11 +36,11 @@ builder.Services.AddCors(options => {
               .AllowAnyHeader());
 });
 
-var app = builder.Build(); // Build the application
+var app = builder.Build(); // Finalizes the services and builds the application
 
 
 
-// Configure the HTTP request pipeline.
+// Configure the HTTP request pipeline
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -49,10 +52,10 @@ if (app.Environment.IsDevelopment())
 }
 
 
-app.UseHttpsRedirection();
-app.UseCors("AllowReactApp");
-app.UseAuthorization();
-app.MapControllers(); 
+app.UseHttpsRedirection(); // Enforces the use of HTTPS (secure connection)
+app.UseCors("AllowReactApp"); // Applies the CORS policy defined earlier (allows React access)
+app.UseAuthorization(); 
+app.MapControllers(); // Maps the incoming HTTP requests to the correct Controller methods
 
-app.Run();
+app.Run(); // Starts the web host making the API available to receive requests
 

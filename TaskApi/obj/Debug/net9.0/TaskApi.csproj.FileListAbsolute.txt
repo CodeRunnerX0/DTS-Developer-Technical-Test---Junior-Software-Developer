@@ -157,3 +157,4 @@
 /Applications/Developer Technical Test/TaskApi/obj/Debug/net9.0/TaskApi.pdb
 /Applications/Developer Technical Test/TaskApi/obj/Debug/net9.0/TaskApi.genruntimeconfig.cache
 /Applications/Developer Technical Test/TaskApi/obj/Debug/net9.0/ref/TaskApi.dll
+/Applications/Developer Technical Test/TaskApi/obj/Debug/net9.0/TaskApi.sourcelink.json
